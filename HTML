@@ -9,127 +9,72 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0f14; --panel:#0f1620; --ink:#e7ecf3; --muted:#a8b0c2; --accent:#4cc9f0; --accent2:#7c5cff;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0; padding:0; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-    a{color:inherit; text-decoration:none}
-    header{position:fixed; top:0; left:0; right:0; z-index:20; backdrop-filter: blur(10px); background:linear-gradient(180deg, rgba(11,15,20,.75), rgba(11,15,20,.35)); border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{max-width:1200px; margin:auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between}
-    .brand{font-weight:800; letter-spacing:.4px}
-    .cta{padding:10px 14px; border-radius:12px; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#05070b; font-weight:700}
-
-    .hero{position:relative; height:100vh; min-height:620px; overflow:hidden}
-    .hero video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(1.1) contrast(1.05)}
-    .hero::after{content:""; position:absolute; inset:0; background:radial-gradient(60% 40% at 50% 60%, rgba(0,0,0,.35), rgba(0,0,0,.7))}
-    .hero-inner{position:relative; z-index:2; height:100%; display:grid; place-items:center; padding:120px 20px 60px}
-    .hero-card{max-width:980px; width:100%; background:rgba(15,22,32,.65); border:1px solid rgba(255,255,255,.08); border-radius:28px; padding:28px; box-shadow:0 20px 80px rgba(0,0,0,.35)}
-    .kicker{color:var(--accent); font-weight:700; letter-spacing:.2em; text-transform:uppercase; font-size:12px}
-    h1{margin:.4em 0 .2em; font-size:clamp(36px,5vw,64px); line-height:1.02}
-    .sub{color:var(--muted); max-width:760px; font-size:18px}
-    .actions{display:flex; gap:14px; margin-top:18px; flex-wrap:wrap}
-    .btn{padding:14px 18px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background:#0b1220; font-weight:700}
-    .btn.primary{background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#05070b; border:none}
-
-    main{padding-top:80px}
-    section{max-width:1200px; margin:80px auto; padding:0 20px}
-    .grid{display:grid; gap:20px}
-    .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .card{background:var(--panel); border:1px solid rgba(255,255,255,.08); border-radius:22px; overflow:hidden}
-    .card video{width:100%; height:220px; object-fit:cover}
-    .card .p{padding:16px}
-    .tag{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(76,201,240,.15); color:var(--accent); font-weight:700; font-size:12px}
-
-    .contact{display:grid; grid-template-columns:1.1fr .9fr; gap:24px}
-    @media(max-width:900px){.contact{grid-template-columns:1fr}}
-    form{background:var(--panel); border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:22px}
-    label{display:block; font-weight:700; margin:12px 0 6px}
-    input,textarea{width:100%; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background:#0b1220; color:var(--ink)}
-    textarea{min-height:120px}
-    footer{border-top:1px solid rgba(255,255,255,.08); padding:30px 20px; color:var(--muted)}
+    :root{--bg:#0b0f14;--panel:#0f1620;--ink:#e7ecf3;--muted:#a8b0c2;--accent:#4cc9f0;--accent2:#7c5cff} *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif} a{color:inherit;text-decoration:none} header{position:fixed;top:0;left:0;right:0;z-index:20;backdrop-filter: blur(10px);background:linear-gradient(180deg, rgba(11,15,20,.75), rgba(11,15,20,.35));border-bottom:1px solid rgba(255,255,255,.06)} .nav{max-width:1200px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between} .brand{font-weight:800;letter-spacing:.4px} .cta{padding:10px 14px;border-radius:12px;background:linear-gradient(135deg, var(--accent), var(--accent2));color:#05070b;font-weight:700} .hero{position:relative;height:100vh;min-height:620px;overflow:hidden} .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.05)} .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 60%, rgba(0,0,0,.35), rgba(0,0,0,.7))} .hero-inner{position:relative;z-index:2;height:100%;display:grid;place-items:center;padding:120px 20px 60px} .hero-card{max-width:980px;width:100%;background:rgba(15,22,32,.65);border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:28px;box-shadow:0 20px 80px rgba(0,0,0,.35)} .kicker{color:var(--accent);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:12px} h1{margin:.4em 0 .2em;font-size:clamp(36px,5vw,64px);line-height:1.02} .sub{color:var(--muted);max-width:760px;font-size:18px} .actions{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap} .btn{padding:14px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:#0b1220;font-weight:700} .btn.primary{background:linear-gradient(135deg, var(--accent), var(--accent2));color:#05070b;border:none} main{padding-top:80px} section{max-width:1200px;margin:80px auto;padding:0 20px} .grid{display:grid;gap:20px} .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))} .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:22px;overflow:hidden} .card video{width:100%;height:220px;object-fit:cover} .card .p{padding:16px} .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(76,201,240,.15);color:var(--accent);font-weight:700;font-size:12px} .contact{display:grid;grid-template-columns:1.1fr .9fr;gap:24px} @media(max-width:900px){.contact{grid-template-columns:1fr}} form{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:22px} label{display:block;font-weight:700;margin:12px 0 6px} input,textarea{width:100%;padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:#0b1220;color:var(--ink)} textarea{min-height:120px} footer{border-top:1px solid rgba(255,255,255,.08);padding:30px 20px;color:var(--muted)}
   </style>
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <div class="brand">LN Photogrammetry</div>
-      <a class="cta" href="#contact">Get a Quote</a>
-    </div>
-  </header>
-
-  <section class="hero">
-    <!-- Replace hero.mp4 with your opening video -->
-    <video src="hero.mp4" autoplay muted loop playsinline></video>
-    <div class="hero-inner">
-      <div class="hero-card">
-        <div class="kicker">Lake Nona · Orlando</div>
-        <h1>Precision 3D Capture & Aerial Photogrammetry</h1>
-        <p class="sub">High‑resolution models, surveys, and visuals for real estate, construction, and site analysis. Fast turnaround. Clean deliverables.</p>
-        <div class="actions">
-          <a class="btn primary" href="#work">View Work</a>
-          <a class="btn" href="#contact">Contact</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <main>
-    <section id="work">
-      <h2>Featured Captures</h2>
-      <p class="sub">Scroll to explore recent projects. Replace the sample videos below with your own MP4 links.</p>
-      <div class="grid cols-3">
-        <div class="card">
-          <video src="project1.mp4" autoplay muted loop playsinline></video>
-          <div class="p"><span class="tag">Residential</span><h3>Exterior Model</h3></div>
-        </div>
-        <div class="card">
-          <video src="project2.mp4" autoplay muted loop playsinline></video>
-          <div class="p"><span class="tag">Construction</span><h3>Progress Scan</h3></div>
-        </div>
-        <div class="card">
-          <video src="project3.mp4" autoplay muted loop playsinline></video>
-          <div class="p"><span class="tag">Commercial</span><h3>Site Overview</h3></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="contact">
-        <div>
-          <p class="sub">Tell us about your site and timeline. You’ll get a clear scope and price quickly.</p>
-          <ul class="sub">
-            <li>✓ FAA‑compliant operations</li>
-            <li>✓ Orthomosaics, meshes, point clouds</li>
-            <li>✓ Web‑ready deliverables</li>
-          </ul>
-        </div>
-        <!-- Static form: connect to Formspree, Basin, or Netlify Forms -->
-        <form
-  action="https://formspree.io/f/xwvpogpg"
-  method="POST"
->
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">Send</button>
+<header>
+<div class="nav">
+<div class="brand">LN Photogrammetry</div>
+<a class="cta" href="#contact">Get a Quote</a>
+</div>
+</header>
+<section class="hero">
+<video src="hero.mp4" autoplay muted loop playsinline></video>
+<div class="hero-inner">
+<div class="hero-card">
+<div class="kicker">Lake Nona · Orlando</div>
+<h1>Precision 3D Capture & Aerial Photogrammetry</h1>
+<p class="sub">High‑resolution models, surveys, and visuals for real estate, construction, and site analysis. Fast turnaround. Clean deliverables.</p>
+<div class="actions">
+<a class="btn primary" href="#work">View Work</a>
+<a class="btn" href="#contact">Contact</a>
+</div>
+</div>
+</div>
+</section>
+<main>
+<section id="work">
+<h2>Featured Captures</h2>
+<p class="sub">Scroll to explore recent projects. Replace the sample videos below with your own MP4 links.</p>
+<div class="grid cols-3">
+<div class="card">
+<video src="project1.mp4" autoplay muted loop playsinline></video>
+<div class="p"><span class="tag">Residential</span><h3>Exterior Model</h3></div>
+</div>
+<div class="card">
+<video src="project2.mp4" autoplay muted loop playsinline></video>
+<div class="p"><span class="tag">Construction</span><h3>Progress Scan</h3></div>
+</div>
+<div class="card">
+<video src="project3.mp4" autoplay muted loop playsinline></video>
+<div class="p"><span class="tag">Commercial</span><h3>Site Overview</h3></div>
+</div>
+</div>
+</section>
+<section id="contact">
+<h2>Contact</h2>
+<div class="contact">
+<div>
+<p class="sub">Tell us about your site and timeline. You’ll get a clear scope and price quickly.</p>
+<ul class="sub">
+<li>✓ FAA‑compliant operations</li>
+<li>✓ Orthomosaics, meshes, point clouds</li>
+<li>✓ Web‑ready deliverables</li>
+</ul>
+</div>
+<form action="https://formspree.io/f/xwvpogpg" method="POST">
+<label>Your Name:<input type="text" name="name" required></label>
+<label>Your Email:<input type="email" name="email" required></label>
+<label>Your Message:<textarea name="message" required></textarea></label>
+<button type="submit" class="btn primary" style="margin-top:14px">Send</button>
 </form>
-        
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div style="max-width:1200px;margin:auto">© <span id="y"></span> LN Photogrammetry</div>
-  </footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</div>
+</section>
+</main>
+<footer>
+<div style="max-width:1200px;margin:auto">© <span id="y"></span> LN Photogrammetry</div>
+</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
