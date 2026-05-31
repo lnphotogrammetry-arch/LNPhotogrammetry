@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LN Photogrammetry</title>
+<meta name="description" content="Photorealistic Gaussian splat 3D models for real estate in Lake Nona & Orlando."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090d;
+  --surface:#0d1117;
+  --surface2:#111820;
+  --ink:#e8edf5;
+  --muted:#7a8499;
+  --dim:#3a4255;
+  --accent:#c8d8f0;
+  --accent-dark:#a0b8e0;
+  --border:rgba(255,255,255,.07);
+  --border-hover:rgba(255,255,255,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Barlow',system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  border-bottom:1px solid var(--border);
+  background:rgba(7,9,13,.85);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+.nav{
+  max-width:1280px;margin:auto;
+  padding:0 28px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand img{height:36px;display:block}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  padding:10px 22px;border-radius:4px;
+  background:var(--accent);color:#07090d;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s,transform .15s;
+}
+.nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px)}
+
+/* HERO */
+.hero{
+  position:relative;height:100vh;min-height:680px;
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%,rgba(100,150,220,.05),transparent),
+    radial-gradient(ellipse 50% 80% at 10% 60%,rgba(20,40,80,.6),transparent),
+    linear-gradient(180deg,rgba(7,9,13,0) 40%,rgba(7,9,13,.95) 100%);
+  z-index:1;
+}
+.hero-grid{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 40%,transparent 100%);
+}
+.hero-scan{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  animation:scan 6s ease-in-out infinite;z-index:2;opacity:.4;
+}
+@keyframes scan{0%{top:10%;opacity:0}20%{opacity:.4}80%{opacity:.4}100%{top:90%;opacity:0}}
+.hero-inner{
+  position:relative;z-index:3;
+  max-width:1280px;width:100%;margin:auto;
+  padding:0 28px 80px;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--accent)}
+h1{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(52px,8vw,110px);
+  font-weight:800;line-height:.95;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+}
+h1 em{color:var(--accent);font-style:normal}
+.hero-sub{
+  max-width:540px;
+  font-size:17px;color:var(--muted);font-weight:400;
+  margin-bottom:36px;line-height:1.65;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-primary{
+  padding:14px 32px;border-radius:4px;
+  background:var(--accent);color:#07090d;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s,transform .15s;
+}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.btn-ghost{
+  padding:14px 32px;border-radius:4px;
+  border:1px solid var(--border-hover);
+  color:var(--ink);
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  transition:border-color .2s,background .2s;
+}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-stats{
+  display:flex;gap:40px;margin-top:56px;
+  padding-top:40px;
+  border-top:1px solid var(--border);
+}
+.stat-val{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:36px;font-weight:700;color:var(--accent);
+  line-height:1;display:block;
+}
+.stat-label{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.05em;margin-top:4px}
+
+/* SECTIONS */
+.wrap{max-width:1280px;margin:auto;padding:0 28px}
+section{padding:100px 0}
+.section-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+}
+.section-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+h2{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(36px,5vw,60px);
+  font-weight:800;text-transform:uppercase;
+  line-height:.95;letter-spacing:-.01em;
+  margin-bottom:12px;
+}
+h2 em{color:var(--accent);font-style:normal}
+.section-sub{color:var(--muted);font-size:16px;max-width:520px;margin-bottom:56px}
+
+/* WORK GRID */
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.work-card{
+  position:relative;overflow:hidden;
+  aspect-ratio:4/5;
+  background:var(--surface);
+  cursor:pointer;
+}
+.work-card:first-child{
+  grid-column:span 2;
+  aspect-ratio:auto;
+}
+.work-card img,.work-card-placeholder{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .6s cubic-bezier(.25,.46,.45,.94);
+  display:block;
+}
+.work-card-placeholder{
+  background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 50%,#0a1520 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+.work-card:hover img,.work-card:hover .work-card-placeholder{transform:scale(1.05)}
+.work-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.85) 100%);
+  opacity:0;transition:opacity .3s;
+}
+.work-card:hover .work-card-overlay{opacity:1}
+.work-card-info{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:20px 24px;
+  transform:translateY(8px);opacity:0;
+  transition:transform .3s,opacity .3s;
+}
+.work-card:hover .work-card-info{transform:translateY(0);opacity:1}
+.work-tag{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);display:block;margin-bottom:4px;
+}
+.work-card-info h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:22px;font-weight:700;text-transform:uppercase;
+}
+.placeholder-icon{
+  width:56px;height:56px;
+  border:1px solid var(--dim);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.placeholder-icon svg{opacity:.25}
+
+/* SPLAT EMBED */
+.splat-feature{border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--surface)}
+.splat-wrap{width:100%;aspect-ratio:16/9;background:#000}
+.splat-wrap iframe{width:100%;height:100%;border:none}
+.splat-meta{padding:18px 24px;border-top:1px solid var(--border);display:flex;align-items:center;gap:20px}
+.splat-meta h3{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase}
+
+/* SERVICES */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2px;
+}
+.service-card{
+  background:var(--surface);
+  padding:36px 32px;
+  border:1px solid transparent;
+  transition:border-color .2s,background .2s;
+}
+.service-card:hover{border-color:var(--border-hover);background:var(--surface2)}
+.service-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:48px;font-weight:800;
+  color:var(--dim);line-height:1;
+  margin-bottom:20px;
+  transition:color .2s;
+}
+.service-card:hover .service-num{color:var(--accent)}
+.service-card h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:22px;font-weight:700;text-transform:uppercase;
+  margin-bottom:12px;letter-spacing:.02em;
+}
+.service-card p{color:var(--muted);font-size:15px;line-height:1.65}
+.service-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.pill{
+  padding:4px 10px;border-radius:2px;
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--border);color:var(--muted);
+}
+
+/* CONTACT */
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;
+  align-items:start;
+}
+@media(max-width:800px){.contact-grid{grid-template-columns:1fr}}
+.contact-left h2{margin-bottom:20px}
+.contact-left p{color:var(--muted);font-size:16px;margin-bottom:32px}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.check-list li{
+  display:flex;align-items:center;gap:12px;
+  font-size:15px;color:var(--muted);
+}
+.check-list li::before{
+  content:'';
+  width:20px;height:20px;flex-shrink:0;
+  border-radius:50%;
+  background:rgba(200,216,240,.08);
+  border:1px solid var(--accent);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%23c8d8f0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+}
+form{background:var(--surface);border:1px solid var(--border);padding:32px;border-radius:4px}
+.field{margin-bottom:20px}
+label{
+  display:block;
+  font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;
+}
+input,textarea{
+  width:100%;padding:13px 16px;
+  background:#0a0e15;
+  border:1px solid var(--border);border-radius:3px;
+  color:var(--ink);font-family:'Barlow',sans-serif;font-size:15px;
+  transition:border-color .2s;
+  outline:none;
+}
+input:focus,textarea:focus{border-color:var(--accent)}
+textarea{min-height:120px;resize:vertical}
+.submit-btn{
+  width:100%;padding:15px;border-radius:4px;border:none;cursor:pointer;
+  background:var(--accent);color:#07090d;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s,transform .15s;
+}
+.submit-btn:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.submit-btn:active{transform:translateY(0)}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:28px;
+}
+.footer-inner{
+  max-width:1280px;margin:auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-copy{font-size:13px;color:var(--muted)}
+
+/* DIVIDER */
+.section-divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .work-grid{grid-template-columns:1fr}
+  .work-card:first-child{grid-column:span 1}
+  .hero-stats{flex-wrap:wrap;gap:24px}
+  .nav-links{display:none}
+}
+@media(max-width:600px){
+  .hero-inner{padding:0 20px 60px}
+  .wrap{padding:0 20px}
+  section{padding:72px 0}
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav class="nav">
+  <a class="brand" href="#">
+    <img src="https://raw.githubusercontent.com/lnphotogrammetry-arch/images/main/LN%20Photogrammetry%20Logo.png" alt="LN Photogrammetry">
+  </a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="nav-cta" href="#contact">Get a Quote</a>
+</nav>
+</header>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Lake Nona · Orlando, FL</div>
+    <h1>Real Estate<br><em>3D Models</em><br>Built Different</h1>
+    <p class="hero-sub">Photorealistic Gaussian splat captures of residential and commercial properties. Immersive, web-embeddable, and ready to impress buyers before they ever step inside.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#work">View Work</a>
+      <a class="btn-ghost" href="#contact">Get a Quote</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-val">3DGS</span>
+        <div class="stat-label">Gaussian Splatting</div>
+      </div>
+      <div>
+        <span class="stat-val">48h</span>
+        <div class="stat-label">Typical Turnaround</div>
+      </div>
+      <div>
+        <span class="stat-val">Web</span>
+        <div class="stat-label">Embed-Ready Output</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="work">
+<div class="wrap">
+  <div class="section-label">Recent Projects</div>
+  <h2>Featured <em>Captures</em></h2>
+  <p class="section-sub">Real deliverables from the field. Add your project media below.</p>
+  <div class="splat-feature reveal">
+    <div class="splat-wrap">
+      <iframe id="viewer" width="100%" height="100%" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=f7ec9b10" style="border:none;display:block;"></iframe>
+    </div>
+    <div class="splat-meta">
+      <span class="work-tag">Residential</span>
+      <h3>Sample House</h3>
+      <p style="color:var(--muted);font-size:14px;margin-top:6px">Click and drag to orbit · Scroll to zoom</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="services">
+<div class="wrap">
+  <div class="section-label">What We Deliver</div>
+  <h2>Gaussian Splat <em>Models</em></h2>
+  <p class="section-sub">One service, done exceptionally well — photorealistic 3D captures for real estate listings.</p>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <h3>On-Site Capture</h3>
+      <p>We photograph the property from every angle using a structured capture workflow optimized for Gaussian splatting reconstruction.</p>
+      <div class="service-tags">
+        <span class="pill">Interior</span>
+        <span class="pill">Exterior</span>
+        <span class="pill">Grounds</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <h3>3DGS Processing</h3>
+      <p>Raw captures are processed into a high-fidelity Gaussian splat scene — photorealistic detail that meshes can't match.</p>
+      <div class="service-tags">
+        <span class="pill">Gaussian Splat</span>
+        <span class="pill">High Fidelity</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <h3>Web-Ready Delivery</h3>
+      <p>Final model delivered as an embeddable web viewer — drop it into any listing page, portfolio, or client presentation.</p>
+      <div class="service-tags">
+        <span class="pill">Web Embed</span>
+        <span class="pill">Shareable Link</span>
+        <span class="pill">48h Turnaround</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="contact">
+<div class="wrap">
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <div class="section-label">Start a Project</div>
+      <h2>Get a <em>Quote</em></h2>
+      <p>Tell us about your property and timeline. You'll get a clear scope and price quickly — no fluff.</p>
+      <ul class="check-list">
+        <li>Residential & commercial properties</li>
+        <li>Photorealistic Gaussian splat output</li>
+        <li>Web-embeddable viewer included</li>
+        <li>Lake Nona & greater Orlando area</li>
+        <li>48-hour standard turnaround</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <form action="https://formspree.io/f/xwvpogpg" method="POST">
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+        </div>
+        <div class="field">
+          <label for="message">Property Details</label>
+          <textarea id="message" name="message" placeholder="Describe the property, address, and when you'd like it captured..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+<div class="footer-inner">
+  <img src="https://raw.githubusercontent.com/lnphotogrammetry-arch/images/main/LN%20Photogrammetry%20Logo.png" alt="LN Photogrammetry" style="height:28px;opacity:.7">
+  <span class="footer-copy">© <span id="yr"></span> LN Photogrammetry · Lake Nona, Orlando FL</span>
+</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
