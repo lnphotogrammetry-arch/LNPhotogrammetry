@@ -277,6 +277,84 @@ h2 em{color:var(--accent);font-style:normal}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%23c8d8f0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:center;
 }
+/* PROCESS STRIP */
+.process-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+  margin-top:2px;
+}
+.process-step{background:var(--surface);padding:24px 22px}
+.process-num{
+  font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;
+  color:var(--dim);display:block;margin-bottom:10px;
+}
+.process-step h4{
+  font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;
+  text-transform:uppercase;margin-bottom:6px;
+}
+.process-step p{color:var(--muted);font-size:13.5px;line-height:1.5}
+@media(max-width:800px){.process-strip{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.process-strip{grid-template-columns:1fr}}
+
+/* PRICING */
+.price-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  padding:36px 40px;
+}
+.price-card-main{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;
+  padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--border);
+}
+.price-amount{
+  font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:var(--accent);
+  line-height:1;margin-right:12px;
+}
+.price-sub{color:var(--muted);font-size:14px}
+.price-includes{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.price-includes li{
+  display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--ink);
+}
+.price-includes li::before{
+  content:'';width:16px;height:16px;flex-shrink:0;margin-top:4px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%23c8d8f0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+}
+.price-note{color:var(--muted);font-size:13.5px;line-height:1.6}
+.price-note a{color:var(--accent);text-decoration:underline}
+
+/* NAV PHONE */
+.nav-phone{
+  font-family:'Barlow Condensed',sans-serif;color:var(--accent)!important;
+  font-weight:700!important;
+}
+
+/* CONTACT DIRECT */
+.contact-direct{
+  margin-top:32px;padding-top:24px;border-top:1px solid var(--border);
+}
+.contact-direct-label{display:block;font-size:12px;color:var(--muted);letter-spacing:.05em;margin-bottom:6px}
+.contact-direct-phone{
+  font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:var(--accent);
+  display:block;margin-bottom:6px;
+}
+.contact-direct-note{font-size:13px;color:var(--muted)}
+
+/* FORM STATES */
+.form-error{color:#e08a8a;font-size:13px;margin-top:14px;display:none}
+.form-success{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  padding:40px 32px;text-align:center;
+}
+.form-success-icon{
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:18px;
+}
+.form-success h3{
+  font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.form-success p{color:var(--muted);font-size:14px}
+.form-success a{color:var(--accent)}
+
 form{background:var(--surface);border:1px solid var(--border);padding:32px;border-radius:4px}
 .field{margin-bottom:20px}
 label{
@@ -348,12 +426,14 @@ footer{
 <header>
 <nav class="nav">
   <a class="brand" href="#">
-    <img src="https://raw.githubusercontent.com/lnphotogrammetry-arch/images/main/LN%20Photogrammetry%20Logo.png" alt="LN Photogrammetry">
+    <img src="logo.png" alt="LN Photogrammetry">
   </a>
   <div class="nav-links">
     <a href="#work">Work</a>
     <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
     <a href="#contact">Contact</a>
+    <a href="tel:4074879843" class="nav-phone">(407) 487-9843</a>
   </div>
   <a class="nav-cta" href="#contact">Get a Quote</a>
 </nav>
@@ -373,16 +453,16 @@ footer{
     </div>
     <div class="hero-stats">
       <div>
-        <span class="stat-val">3DGS</span>
-        <div class="stat-label">Gaussian Splatting</div>
+        <span class="stat-val">$275</span>
+        <div class="stat-label">Flat Rate, Standard Home</div>
       </div>
       <div>
         <span class="stat-val">48h</span>
         <div class="stat-label">Typical Turnaround</div>
       </div>
       <div>
-        <span class="stat-val">Web</span>
-        <div class="stat-label">Embed-Ready Output</div>
+        <span class="stat-val">360°</span>
+        <div class="stat-label">Explorable From Any Angle</div>
       </div>
     </div>
   </div>
@@ -392,17 +472,40 @@ footer{
 
 <section id="work">
 <div class="wrap">
-  <div class="section-label">Recent Projects</div>
-  <h2>Featured <em>Captures</em></h2>
-  <p class="section-sub">Real deliverables from the field. Add your project media below.</p>
+  <div class="section-label">See The Quality</div>
+  <h2>This Is Exactly <em>What You Get</em></h2>
+  <p class="section-sub">We captured our own home so you can see the real output before you book — no stock demos, no rendered mockups.</p>
   <div class="splat-feature reveal">
     <div class="splat-wrap">
       <iframe id="viewer" width="100%" height="100%" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=f7ec9b10" style="border:none;display:block;"></iframe>
     </div>
     <div class="splat-meta">
-      <span class="work-tag">Residential</span>
-      <h3>Sample House</h3>
+      <span class="work-tag">Demo Capture · Owner's Residence</span>
+      <h3>Exterior Aerial Model</h3>
       <p style="color:var(--muted);font-size:14px;margin-top:6px">Click and drag to orbit · Scroll to zoom</p>
+    </div>
+  </div>
+
+  <div class="process-strip reveal reveal-delay-1">
+    <div class="process-step">
+      <span class="process-num">01</span>
+      <h4>Capture</h4>
+      <p>Single drone flight around the property, 30-40 min on site.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">02</span>
+      <h4>Process</h4>
+      <p>Reconstruction and Gaussian splat training on our own rig.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">03</span>
+      <h4>QA</h4>
+      <p>Cleanup pass — artifacts trimmed, bounds cropped, checked on mobile.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">04</span>
+      <h4>Deliver</h4>
+      <p>Hosted link and embed code, ready to drop into your listing.</p>
     </div>
   </div>
 </div>
@@ -414,16 +517,16 @@ footer{
 <div class="wrap">
   <div class="section-label">What We Deliver</div>
   <h2>Gaussian Splat <em>Models</em></h2>
-  <p class="section-sub">One service, done exceptionally well — photorealistic 3D captures for real estate listings.</p>
+  <p class="section-sub">One service, done exceptionally well — photorealistic exterior and grounds captures that pair with your existing interior photos.</p>
   <div class="services-grid">
     <div class="service-card reveal">
       <div class="service-num">01</div>
-      <h3>On-Site Capture</h3>
-      <p>We photograph the property from every angle using a structured capture workflow optimized for Gaussian splatting reconstruction.</p>
+      <h3>Aerial Capture</h3>
+      <p>We fly the full exterior and grounds using a structured drone capture pattern optimized for Gaussian splatting reconstruction.</p>
       <div class="service-tags">
-        <span class="pill">Interior</span>
         <span class="pill">Exterior</span>
         <span class="pill">Grounds</span>
+        <span class="pill">Curb Appeal</span>
       </div>
     </div>
     <div class="service-card reveal reveal-delay-1">
@@ -451,6 +554,32 @@ footer{
 
 <div class="section-divider"></div>
 
+<section id="pricing">
+<div class="wrap">
+  <div class="section-label">Simple Pricing</div>
+  <h2>One Flat <em>Rate</em></h2>
+  <p class="section-sub">Most Lake Nona homes are similar in size — so the price is too. No surprise line items.</p>
+  <div class="price-card reveal">
+    <div class="price-card-main">
+      <div>
+        <span class="price-amount">$275</span>
+        <span class="price-sub">flat, per property</span>
+      </div>
+      <a class="btn-primary" href="#contact">Book This Rate →</a>
+    </div>
+    <ul class="price-includes">
+      <li>Exterior & grounds aerial capture — 1-2 story homes, standard Lake Nona lot sizes</li>
+      <li>Full Gaussian splat processing and cleanup</li>
+      <li>Hosted, embeddable 3D model with shareable link</li>
+      <li>48-hour typical turnaround</li>
+    </ul>
+    <p class="price-note">Larger lots, multi-acre properties, gated communities, or rush turnaround: <a href="#contact">contact for a custom quote</a>. Need recurring capture for an active construction site or a development? Ask about monthly documentation packages.</p>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
 <section id="contact">
 <div class="wrap">
   <div class="contact-grid">
@@ -459,15 +588,20 @@ footer{
       <h2>Get a <em>Quote</em></h2>
       <p>Tell us about your property and timeline. You'll get a clear scope and price quickly — no fluff.</p>
       <ul class="check-list">
-        <li>Residential & commercial properties</li>
+        <li>Exterior & grounds aerial capture</li>
         <li>Photorealistic Gaussian splat output</li>
         <li>Web-embeddable viewer included</li>
         <li>Lake Nona & greater Orlando area</li>
         <li>48-hour standard turnaround</li>
       </ul>
+      <div class="contact-direct">
+        <span class="contact-direct-label">Prefer to talk it through?</span>
+        <a href="tel:4074879843" class="contact-direct-phone">(407) 487-9843</a>
+        <span class="contact-direct-note">Call or text — you'll reach the person flying the drone, not a call center.</span>
+      </div>
     </div>
     <div class="reveal reveal-delay-1">
-      <form action="https://formspree.io/f/xwvpogpg" method="POST">
+      <form id="quoteForm" action="https://formspree.io/f/xwvpogpg" method="POST">
         <div class="field">
           <label for="name">Your Name</label>
           <input type="text" id="name" name="name" placeholder="Jane Smith" required>
@@ -480,8 +614,14 @@ footer{
           <label for="message">Property Details</label>
           <textarea id="message" name="message" placeholder="Describe the property, address, and when you'd like it captured..." required></textarea>
         </div>
-        <button type="submit" class="submit-btn">Send Message →</button>
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message →</button>
+        <p id="formError" class="form-error"></p>
       </form>
+      <div id="formSuccess" class="form-success" style="display:none">
+        <div class="form-success-icon">✓</div>
+        <h3>Message sent</h3>
+        <p>We typically reply within one business day. If it's urgent, call or text <a href="tel:4074879843">(407) 487-9843</a>.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -489,13 +629,41 @@ footer{
 
 <footer>
 <div class="footer-inner">
-  <img src="https://raw.githubusercontent.com/lnphotogrammetry-arch/images/main/LN%20Photogrammetry%20Logo.png" alt="LN Photogrammetry" style="height:28px;opacity:.7">
-  <span class="footer-copy">© <span id="yr"></span> LN Photogrammetry · Lake Nona, Orlando FL</span>
+  <img src="logo.png" alt="LN Photogrammetry" style="height:28px;opacity:.7">
+  <span class="footer-copy">© <span id="yr"></span> LN Photogrammetry · Lake Nona, Orlando FL · <a href="tel:4074879843" style="color:var(--muted)">(407) 487-9843</a></span>
 </div>
 </footer>
 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+const quoteForm = document.getElementById('quoteForm');
+const formError = document.getElementById('formError');
+quoteForm.addEventListener('submit', async function(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  formError.style.display = 'none';
+  try{
+    const res = await fetch(quoteForm.action, {
+      method: 'POST',
+      body: new FormData(quoteForm),
+      headers: { 'Accept': 'application/json' }
+    });
+    if(res.ok){
+      quoteForm.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      throw new Error('Submit failed');
+    }
+  } catch(err){
+    formError.textContent = "Something went wrong sending that. Call or text (407) 487-9843 and we'll get you sorted.";
+    formError.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Send Message →';
+  }
+});
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
