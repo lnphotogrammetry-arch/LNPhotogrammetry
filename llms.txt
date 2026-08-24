@@ -1,0 +1,25 @@
+# LN Photogrammetry
+
+> Drone-based photorealistic 3D (Gaussian splat) capture service for real estate listings in Lake Nona and greater Orlando, FL. $275 flat rate per standard property, 48-hour typical turnaround.
+
+## Service
+- Aerial drone capture of a property's exterior and grounds
+- Gaussian splat (3D Gaussian Splatting) processing into a photorealistic, web-embeddable 3D model
+- Delivered as a hosted, shareable link for use on listing pages, MLS (where supported), and social media
+
+## Pricing
+- $275 flat rate per property (1-2 story homes, standard Lake Nona lot sizes)
+- Custom quote for larger lots, multi-acre properties, or gated communities
+- Bulk / recurring rates available for realtors listing multiple properties per month
+
+## Area served
+Lake Nona, FL and the greater Orlando, FL area.
+
+## Contact
+- Phone / text: (407) 487-9843
+- Quote request: https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/#contact
+
+## Pages
+- [Homepage](https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/): services, pricing, FAQ, and quote request form
+- [Privacy Policy](https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/privacy.html)
+- [Terms of Service](https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/terms.html)
