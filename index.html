@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LN Photogrammetry | Drone 3D Real Estate Models, Lake Nona &amp; Orlando</title>
+<meta name="description" content="Drone-captured, photorealistic Gaussian splat 3D models for real estate in Lake Nona & Orlando, FL. $275 flat rate, 48-hour turnaround."/>
+<link rel="canonical" href="https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/">
+<meta name="theme-color" content="#07090d">
+
+<!-- Local/geo signals -->
+<meta name="geo.region" content="US-FL">
+<meta name="geo.placename" content="Lake Nona, Orlando">
+<meta name="geo.position" content="28.3772;-81.2673">
+<meta name="ICBM" content="28.3772, -81.2673">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+
+<!-- Open Graph / link previews -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="LN Photogrammetry | Drone 3D Real Estate Models">
+<meta property="og:description" content="Drone-captured, photorealistic Gaussian splat 3D models for real estate in Lake Nona & Orlando, FL. $275 flat rate, 48-hour turnaround.">
+<meta property="og:image" content="https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/logo-full.png">
+<meta property="og:url" content="https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LN Photogrammetry | Drone 3D Real Estate Models">
+<meta name="twitter:description" content="Drone-captured, photorealistic Gaussian splat 3D models for real estate in Lake Nona & Orlando, FL. $275 flat rate, 48-hour turnaround.">
+<meta name="twitter:image" content="https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/logo-full.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090d;
+  --surface:#0d1117;
+  --surface2:#111820;
+  --ink:#e8edf5;
+  --muted:#7a8499;
+  --dim:#5a6889;
+  --accent:#c8d8f0;
+  --accent-dark:#a0b8e0;
+  --accent-ink:#07090d;
+  --border:rgba(255,255,255,.07);
+  --border-hover:rgba(255,255,255,.15);
+  --header-bg:rgba(7,9,13,.97);
+  --input-bg:#0a0e15;
+  --vignette:rgba(7,9,13,.95);
+  --overlay:rgba(0,0,0,.55);
+  color-scheme: dark;
+  font-size:100%;
+}
+html[data-text-size="large"]{font-size:112.5%}
+html[data-text-size="larger"]{font-size:125%}
+html[data-theme="light"]{
+  --bg:#f4f6f9;
+  --surface:#ffffff;
+  --surface2:#eef1f6;
+  --ink:#10141c;
+  --muted:#5b6472;
+  --dim:#7d89a1;
+  --accent:#2d4b86;
+  --accent-dark:#1f3760;
+  --accent-ink:#ffffff;
+  --border:rgba(10,14,20,.09);
+  --border-hover:rgba(10,14,20,.2);
+  --header-bg:rgba(255,255,255,.97);
+  --input-bg:#f7f8fa;
+  --vignette:rgba(244,246,249,.95);
+  --overlay:rgba(255,255,255,.6);
+  color-scheme: light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Barlow',system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;transition:background .25s ease,color .25s ease}
+a{color:inherit;text-decoration:none}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;}
+}
+html[data-reduce-motion="true"]{scroll-behavior:auto}
+html[data-reduce-motion="true"] *{
+  animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;
+}
+
+/* SCROLL PROGRESS BAR */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--accent-dark));
+  z-index:300;transition:width .1s linear;
+}
+
+/* SKIP LINK */
+.skip-link{
+  position:fixed;top:-100px;left:12px;z-index:400;
+  background:var(--accent);color:var(--accent-ink);
+  padding:12px 20px;border-radius:4px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  transition:top .2s ease;
+}
+.skip-link:focus{top:12px}
+
+/* NAV */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  border-bottom:1px solid var(--border);
+  background:var(--header-bg);
+  transition:background .25s ease,border-color .25s ease;
+}
+.nav{
+  max-width:1280px;margin:auto;
+  padding:0 28px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{height:34px;display:block}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--ink)}
+.nav-cta{
+  padding:10px 22px;border-radius:4px;
+  background:var(--accent);color:var(--accent-ink);
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s,transform .15s;
+}
+.nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.nav-right{display:flex;align-items:center;gap:12px}
+
+/* Theme toggle */
+.theme-toggle{
+  width:38px;height:38px;border-radius:4px;
+  border:1px solid var(--border-hover);
+  background:transparent;color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .2s,border-color .2s,transform .15s;
+}
+.theme-toggle:hover{background:var(--surface2);border-color:var(--accent);transform:translateY(-1px)}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle .icon-moon{display:none}
+html[data-theme="light"] .theme-toggle .icon-sun{display:none}
+html[data-theme="light"] .theme-toggle .icon-moon{display:block}
+
+/* Accessibility panel */
+.a11y-wrap{position:relative}
+.a11y-panel{
+  display:none;
+  position:absolute;top:calc(100% + 10px);right:0;
+  width:230px;background:var(--surface);border:1px solid var(--border-hover);
+  border-radius:6px;padding:16px;z-index:200;
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+.a11y-panel.open{display:block}
+.a11y-row{margin-bottom:16px}
+.a11y-row:last-child{margin-bottom:0}
+.a11y-label{
+  display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;
+}
+.a11y-textsize-buttons{display:flex;gap:6px}
+.a11y-textsize-buttons button{
+  flex:1;padding:8px 0;border-radius:4px;border:1px solid var(--border-hover);
+  background:transparent;color:var(--ink);cursor:pointer;font-family:'Barlow',sans-serif;
+  transition:background .2s,border-color .2s;
+}
+.a11y-textsize-buttons button[data-size="normal"]{font-size:13px}
+.a11y-textsize-buttons button[data-size="large"]{font-size:15px}
+.a11y-textsize-buttons button[data-size="larger"]{font-size:17px}
+.a11y-textsize-buttons button:hover{border-color:var(--accent)}
+.a11y-textsize-buttons button.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.a11y-switch-row{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.a11y-switch-row .a11y-label{margin-bottom:0}
+.a11y-switch{
+  position:relative;width:38px;height:22px;flex-shrink:0;
+  appearance:none;background:var(--border-hover);border-radius:11px;cursor:pointer;
+  transition:background .2s;
+}
+.a11y-switch::before{
+  content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;
+  background:var(--ink);transition:transform .2s;
+}
+.a11y-switch:checked{background:var(--accent)}
+.a11y-switch:checked::before{transform:translateX(16px);background:var(--accent-ink)}
+
+/* Hamburger (hidden on desktop) */
+.nav-toggle{
+  display:none;
+  width:40px;height:40px;
+  border:1px solid var(--border-hover);
+  border-radius:4px;
+  background:transparent;
+  cursor:pointer;
+  align-items:center;justify-content:center;
+  flex-direction:column;gap:4px;
+  transition:background .2s;
+}
+.nav-toggle:hover{background:var(--surface2)}
+.nav-toggle span{
+  display:block;width:18px;height:2px;background:var(--ink);
+  transition:transform .25s ease, opacity .2s ease;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* Mobile dropdown panel */
+.mobile-menu{
+  display:none;
+  max-height:0;overflow:hidden;
+  border-bottom:1px solid var(--border);
+  background:var(--header-bg);
+  transition:max-height .3s ease,background .25s ease;
+}
+.mobile-menu.open{max-height:80vh;overflow-y:auto}
+.mobile-menu-inner{padding:8px 28px 24px;display:flex;flex-direction:column;gap:2px}
+.mobile-menu-inner a{
+  padding:14px 4px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  color:var(--ink);
+  border-bottom:1px solid var(--border);
+  transition:color .2s;
+}
+.mobile-menu-inner a:hover{color:var(--accent)}
+.mobile-menu-phone{
+  margin-top:14px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:24px;font-weight:800;color:var(--accent);
+}
+.mobile-menu-note{color:var(--muted);font-size:0.8125rem;margin-top:4px}
+.mobile-menu-theme{
+  margin-top:18px;display:flex;align-items:center;gap:10px;
+  color:var(--muted);font-size:13px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;
+}
+
+/* HERO */
+.hero{
+  position:relative;height:100vh;min-height:680px;
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 40%,var(--vignette) 100%);
+  z-index:1;transition:background .25s ease;
+}
+.hero-grid{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 40%,transparent 100%);
+}
+.hero-scan{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  animation:scan 6s ease-in-out infinite;z-index:2;opacity:.4;
+}
+@keyframes scan{0%{top:10%;opacity:0}20%{opacity:.4}80%{opacity:.4}100%{top:90%;opacity:0}}
+.hero-inner{
+  position:relative;z-index:3;
+  max-width:1280px;width:100%;margin:auto;
+  padding:0 28px 80px;
+  opacity:0;transform:translateY(16px);
+  animation:heroIn .8s ease forwards .15s;
+}
+@keyframes heroIn{to{opacity:1;transform:none}}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--accent)}
+h1{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(52px,8vw,110px);
+  font-weight:800;line-height:.95;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+}
+h1 em{color:var(--accent);font-style:normal}
+.hero-sub{
+  max-width:540px;
+  font-size:1.0625rem;color:var(--muted);font-weight:400;
+  margin-bottom:36px;line-height:1.65;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-primary{
+  padding:14px 32px;border-radius:4px;
+  background:var(--accent);color:var(--accent-ink);
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s,transform .15s,box-shadow .2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.btn-primary .arrow{transition:transform .2s ease}
+.btn-primary:hover .arrow{transform:translateX(4px)}
+.btn-ghost{
+  padding:14px 32px;border-radius:4px;
+  border:1px solid var(--border-hover);
+  color:var(--ink);
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  transition:border-color .2s,background .2s,transform .15s;
+}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.hero-stats{
+  display:flex;gap:40px;margin-top:56px;
+  padding-top:40px;
+  border-top:1px solid var(--border);
+}
+.stat-val{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:36px;font-weight:700;color:var(--accent);
+  line-height:1;display:block;
+}
+.stat-label{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.05em;margin-top:4px}
+
+/* SECTIONS */
+.wrap{max-width:1280px;margin:auto;padding:0 28px}
+section{padding:100px 0}
+.section-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+}
+.section-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+h2{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(36px,5vw,60px);
+  font-weight:800;text-transform:uppercase;
+  line-height:.95;letter-spacing:-.01em;
+  margin-bottom:12px;
+}
+h2 em{color:var(--accent);font-style:normal}
+.section-sub{color:var(--muted);font-size:1rem;max-width:520px;margin-bottom:56px}
+
+/* SPLAT EMBED */
+.splat-feature{border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--surface);transition:background .25s ease,border-color .25s ease}
+.splat-wrap{width:100%;aspect-ratio:16/9;background:#000;position:relative}
+.splat-wrap iframe{width:100%;height:100%;border:none;position:relative;z-index:1}
+.splat-loading{
+  position:absolute;inset:0;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  background:#000;
+  transition:opacity .4s ease;
+}
+.splat-loading.hidden{opacity:0;pointer-events:none}
+.spinner{
+  width:36px;height:36px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.15);
+  border-top-color:var(--accent);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.splat-meta{padding:18px 24px;border-top:1px solid var(--border);display:flex;align-items:center;gap:20px}
+.splat-meta h3{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase}
+
+/* SERVICES */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2px;
+}
+.service-card{
+  background:var(--surface);
+  padding:36px 32px;
+  border:1px solid transparent;
+  transition:border-color .2s,background .2s,transform .2s;
+}
+.service-card:hover{border-color:var(--border-hover);background:var(--surface2);transform:translateY(-2px)}
+.service-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:48px;font-weight:800;
+  color:var(--dim);line-height:1;
+  margin-bottom:20px;
+  transition:color .2s;
+}
+.service-card:hover .service-num{color:var(--accent)}
+.service-card h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:22px;font-weight:700;text-transform:uppercase;
+  margin-bottom:12px;letter-spacing:.02em;
+}
+.service-card p{color:var(--muted);font-size:0.9375rem;line-height:1.65}
+.service-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.pill{
+  padding:4px 10px;border-radius:2px;
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--border);color:var(--muted);
+}
+
+/* CONTACT */
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;
+  align-items:start;
+}
+@media(max-width:800px){.contact-grid{grid-template-columns:1fr}}
+.contact-left h2{margin-bottom:20px}
+.contact-left p{color:var(--muted);font-size:1rem;margin-bottom:32px}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.check-list li{
+  display:flex;align-items:center;gap:12px;
+  font-size:0.9375rem;color:var(--muted);
+}
+.check-ico{
+  width:20px;height:20px;flex-shrink:0;
+  border-radius:50%;
+  border:1px solid var(--accent);
+  color:var(--accent);
+}
+/* PROCESS STRIP */
+.process-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+  margin-top:2px;
+}
+.process-step{background:var(--surface);padding:24px 22px;transition:background .2s,transform .2s}
+.process-step:hover{transform:translateY(-2px)}
+.process-num{
+  font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;
+  color:var(--dim);display:block;margin-bottom:10px;
+}
+.process-step h4{
+  font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;
+  text-transform:uppercase;margin-bottom:6px;
+}
+.process-step p{color:var(--muted);font-size:0.84375rem;line-height:1.5}
+@media(max-width:800px){.process-strip{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.process-strip{grid-template-columns:1fr}}
+
+/* PRICING */
+.price-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  padding:36px 40px;transition:background .25s ease,border-color .25s ease;
+}
+.price-card-main{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;
+  padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--border);
+}
+.price-amount{
+  font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:var(--accent);
+  line-height:1;margin-right:12px;
+}
+.price-sub{color:var(--muted);font-size:14px}
+.price-includes{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.price-includes li{
+  display:flex;align-items:flex-start;gap:12px;font-size:0.9375rem;color:var(--ink);
+}
+.check-ico-sm{width:16px;height:16px;flex-shrink:0;margin-top:4px;color:var(--accent)}
+.price-note{color:var(--muted);font-size:0.84375rem;line-height:1.6}
+.price-note a{color:var(--accent);text-decoration:underline}
+
+/* RECURRING PACKAGES */
+.recurring-block{
+  margin-top:24px;
+  border:1px solid var(--border);border-radius:6px;
+  background:linear-gradient(180deg,var(--surface) 0%,var(--surface2) 100%);
+  padding:32px 40px;transition:background .25s ease,border-color .25s ease;
+}
+.recurring-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px}
+.recurring-head h3{
+  font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;text-transform:uppercase;
+}
+.recurring-head p{color:var(--muted);font-size:14px;max-width:420px}
+.recurring-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border)}
+.tier{background:var(--surface);padding:22px 20px;transition:background .2s,transform .2s}
+.tier:hover{transform:translateY(-2px)}
+.tier-name{
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;
+}
+.tier-freq{font-size:14px;color:var(--ink);margin-bottom:6px;font-weight:600}
+.tier-desc{font-size:13px;color:var(--muted);line-height:1.55}
+@media(max-width:700px){.recurring-tiers{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:2px}
+.faq-item{
+  background:var(--surface);border:1px solid transparent;
+  transition:border-color .2s,background .2s;
+}
+.faq-item[open]{border-color:var(--border-hover)}
+.faq-item summary{
+  list-style:none;cursor:pointer;
+  padding:22px 26px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.01em;
+  transition:color .2s;
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:var(--accent)}
+.faq-icon{
+  flex-shrink:0;width:22px;height:22px;border-radius:50%;
+  border:1px solid var(--border-hover);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow',sans-serif;font-size:16px;font-weight:400;color:var(--muted);
+  transition:transform .25s ease,color .2s;
+}
+.faq-item[open] .faq-icon{transform:rotate(45deg);color:var(--accent)}
+.faq-answer{padding:0 26px 24px;color:var(--muted);font-size:0.9375rem;line-height:1.65;max-width:640px}
+
+/* NAV PHONE */
+.nav-phone{
+  font-family:'Barlow Condensed',sans-serif;color:var(--accent)!important;
+  font-weight:700!important;
+}
+
+/* CONTACT DIRECT */
+.contact-direct{
+  margin-top:32px;padding-top:24px;border-top:1px solid var(--border);
+}
+.contact-direct-label{display:block;font-size:12px;color:var(--muted);letter-spacing:.05em;margin-bottom:6px}
+.contact-direct-phone{
+  font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:var(--accent);
+  display:block;margin-bottom:6px;
+}
+.contact-direct-note{font-size:0.8125rem;color:var(--muted)}
+
+/* FORM STATES */
+.form-error{color:#e08a8a;font-size:13px;margin-top:14px;display:none}
+.form-success{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  padding:40px 32px;text-align:center;
+}
+.form-success-icon{
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:18px;
+}
+.form-success h3{
+  font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.form-success p{color:var(--muted);font-size:14px}
+.form-success a{color:var(--accent)}
+
+form{background:var(--surface);border:1px solid var(--border);padding:32px;border-radius:4px;transition:background .25s ease,border-color .25s ease}
+.field{margin-bottom:20px}
+label{
+  display:block;
+  font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;
+}
+input,textarea{
+  width:100%;padding:13px 16px;
+  background:var(--input-bg);
+  border:1px solid var(--border);border-radius:3px;
+  color:var(--ink);font-family:'Barlow',sans-serif;font-size:0.9375rem;
+  transition:border-color .2s,background .25s ease;
+  outline:none;
+}
+input:focus,textarea:focus{border-color:var(--accent)}
+input:focus-visible,textarea:focus-visible,a:focus-visible,button:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+textarea{min-height:120px;resize:vertical}
+.submit-btn{
+  width:100%;padding:15px;border-radius:4px;border:none;cursor:pointer;
+  background:var(--accent);color:var(--accent-ink);
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s,transform .15s;
+}
+.submit-btn:hover:not(:disabled){background:var(--accent-dark);transform:translateY(-1px)}
+.submit-btn:active:not(:disabled){transform:translateY(0)}
+.submit-btn:disabled{cursor:wait;opacity:.85}
+.submit-btn .btn-spinner{
+  display:inline-block;width:14px;height:14px;border-radius:50%;
+  border:2px solid rgba(7,9,13,.3);border-top-color:var(--accent-ink);
+  animation:spin .7s linear infinite;margin-right:8px;vertical-align:-2px;
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:28px;
+}
+.footer-inner{
+  max-width:1280px;margin:auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-brand{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.footer-brand img{height:24px;opacity:.85}
+.footer-copy{font-size:0.8125rem;color:var(--muted)}
+.footer-links{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:var(--muted);transition:color .2s}
+.footer-links a:hover{color:var(--accent)}
+.footer-meta{width:100%;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--dim)}
+
+/* DIVIDER */
+.section-divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* BACK TO TOP */
+.back-to-top{
+  position:fixed;right:24px;bottom:24px;z-index:150;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--accent);color:var(--accent-ink);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;transform:translateY(12px);
+  transition:opacity .25s ease,transform .25s ease,background .2s;
+}
+.back-to-top.show{opacity:1;pointer-events:auto;transform:none}
+.back-to-top:hover{background:var(--accent-dark)}
+.back-to-top svg{width:18px;height:18px}
+
+/* COOKIE BANNER */
+.cookie-banner{
+  position:fixed;left:0;right:0;bottom:0;z-index:250;
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:18px 28px;
+  display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;
+  transform:translateY(100%);transition:transform .35s ease,background .25s ease;
+}
+.cookie-banner.visible{transform:translateY(0)}
+.cookie-banner p{font-size:0.84375rem;color:var(--muted);max-width:640px}
+.cookie-banner a{color:var(--accent);text-decoration:underline}
+.cookie-accept{
+  padding:10px 24px;border-radius:4px;border:none;cursor:pointer;flex-shrink:0;
+  background:var(--accent);color:var(--accent-ink);
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s,transform .15s;
+}
+.cookie-accept:hover{background:var(--accent-dark);transform:translateY(-1px)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-stats{flex-wrap:wrap;gap:24px}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-toggle{display:flex}
+  .mobile-menu{display:block}
+}
+
+@media(max-width:600px){
+  .hero-inner{padding:0 20px 60px}
+  .wrap{padding:0 20px}
+  section{padding:72px 0}
+  .price-card{padding:28px 22px}
+  .recurring-block{padding:24px 22px}
+  .back-to-top{right:16px;bottom:16px}
+  .cookie-banner{padding:16px 18px;justify-content:flex-start}
+}
+</style>
+<!-- Structured data for search engines and AI answer engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/#business",
+  "name": "LN Photogrammetry",
+  "alternateName": "LN Photogrammetry Drone 3D Real Estate Models",
+  "description": "Drone-based aerial capture and Gaussian splat (3D Gaussian splatting) photorealistic 3D model production for real estate listings, serving Lake Nona and the greater Orlando, Florida area.",
+  "url": "https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/",
+  "telephone": "+1-407-487-9843",
+  "priceRange": "$275",
+  "image": "https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/logo-full.png",
+  "logo": "https://lnphotogrammetry-arch.github.io/LNPhotogrammetry/logo-full.png",
+  "areaServed": [
+    { "@type": "Place", "name": "Lake Nona, Orlando, FL" },
+    { "@type": "Place", "name": "Orlando, FL" }
+  ],
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 28.3772,
+    "longitude": -81.2673
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "3D Real Estate Capture Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Standard Property 3D Capture",
+          "description": "Drone aerial capture of a property's exterior and grounds, processed into a photorealistic Gaussian splat 3D model, delivered as a hosted embeddable web viewer. Covers 1-2 story homes on standard Lake Nona lot sizes."
+        },
+        "price": "275",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Bulk / Recurring Realtor Rates",
+          "description": "Discounted per-property rates for realtors capturing multiple listings per month, with priority scheduling."
+        }
+      }
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What areas do you serve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lake Nona and the greater Orlando area. If you're just outside that range, reach out. Longer drives may carry a small travel add-on."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a capture take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most standard homes take about 30-40 minutes on site for the aerial flight. Larger lots or multiple buildings take longer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if it rains or is too windy to fly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We reschedule at no charge. Wind and rain both affect flight safety and image quality, so we wait for a clean weather window rather than deliver a lower-quality capture."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to be at the property during the capture?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not necessarily, but we do need reliable access arranged ahead of time, whether that's a gate code, lockbox, or someone letting us onto the property."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use the 3D model anywhere I want?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The delivered model and shareable link are yours to embed on your listing page, MLS (where supported), and social media."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's your turnaround time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "48 hours is typical from capture to delivery. Rush turnaround may be available; ask when you request a quote."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if something in the model looks off?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reach out and we'll take a look. Minor cleanup on our end is part of the service; we want the delivered model to actually be usable for you."
+      }
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header>
+<nav class="nav">
+  <a class="brand" href="#" aria-label="LN Photogrammetry home">
+    <img src="logo-mark.png" alt="LN Photogrammetry" id="navLogo">
+  </a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:4074879843" class="nav-phone">(407) 487-9843</a>
+  </div>
+  <div class="nav-right">
+    <div class="a11y-wrap">
+      <button class="theme-toggle" id="a11yToggle" aria-label="Accessibility settings" aria-expanded="false" aria-controls="a11yPanel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="1.5" fill="currentColor" stroke="none"/><path d="M5 8l7 2 7-2M12 10v5M9 20l3-5 3 5"/></svg>
+      </button>
+      <div class="a11y-panel" id="a11yPanel">
+        <div class="a11y-row">
+          <span class="a11y-label">Text Size</span>
+          <div class="a11y-textsize-buttons" role="group" aria-label="Text size">
+            <button type="button" data-size="normal" class="active" aria-pressed="true">A</button>
+            <button type="button" data-size="large" aria-pressed="false">A</button>
+            <button type="button" data-size="larger" aria-pressed="false">A</button>
+          </div>
+        </div>
+        <label class="a11y-row a11y-switch-row" for="reduceMotionToggle">
+          <span class="a11y-label">Reduce Motion</span>
+          <input type="checkbox" class="a11y-switch" id="reduceMotionToggle">
+        </label>
+      </div>
+    </div>
+    <button class="theme-toggle" id="themeToggleDesktop" aria-label="Toggle light and dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a class="nav-cta" href="#contact">Get a Quote</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:4074879843" class="mobile-menu-phone">(407) 487-9843</a>
+    <span class="mobile-menu-note">Call or text: you'll reach the person flying the drone.</span>
+    <div class="mobile-menu-theme">
+      <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle light and dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <span>Light / Dark</span>
+    </div>
+    <div class="a11y-row" style="margin-top:18px">
+      <span class="a11y-label">Text Size</span>
+      <div class="a11y-textsize-buttons" role="group" aria-label="Text size">
+        <button type="button" data-size="normal" class="active" aria-pressed="true">A</button>
+        <button type="button" data-size="large" aria-pressed="false">A</button>
+        <button type="button" data-size="larger" aria-pressed="false">A</button>
+      </div>
+    </div>
+    <label class="a11y-row a11y-switch-row" for="reduceMotionToggleMobile" style="margin-top:14px">
+      <span class="a11y-label">Reduce Motion</span>
+      <input type="checkbox" class="a11y-switch" id="reduceMotionToggleMobile">
+    </label>
+  </div>
+</div>
+</header>
+
+<main id="main-content">
+<section class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-scan" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Lake Nona · Orlando, FL</div>
+    <h1>Real Estate<br><em>3D Models</em><br>Built Different</h1>
+    <p class="hero-sub">Photorealistic Gaussian splat captures of residential and commercial properties. Immersive, web-embeddable, and ready to impress buyers before they ever step inside.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#work">View Work</a>
+      <a class="btn-ghost" href="#contact">Get a Quote</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-val">$275</span>
+        <div class="stat-label">Flat Rate, Standard Home</div>
+      </div>
+      <div>
+        <span class="stat-val">48h</span>
+        <div class="stat-label">Typical Turnaround</div>
+      </div>
+      <div>
+        <span class="stat-val">360°</span>
+        <div class="stat-label">Explorable From Any Angle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="work">
+<div class="wrap">
+  <div class="section-label">See The Quality</div>
+  <h2>This Is Exactly <em>What You Get</em></h2>
+  <p class="section-sub">The model below is unedited output from a live capture and render. No fake mockups.</p>
+  <div class="splat-feature reveal">
+    <div class="splat-wrap">
+      <div class="splat-loading" id="splatLoading"><div class="spinner"></div></div>
+      <iframe id="viewer" width="800" height="500" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=c4d5943c" title="LN Photogrammetry demo Gaussian splat model" loading="lazy"></iframe>
+    </div>
+    <div class="splat-meta">
+      <span class="work-tag">Demo Capture</span>
+      <h3>Exterior Aerial Model</h3>
+      <p style="color:var(--muted);font-size:14px;margin-top:6px">Click and drag to orbit · Scroll to zoom</p>
+    </div>
+  </div>
+
+  <div class="process-strip reveal reveal-delay-1">
+    <div class="process-step">
+      <span class="process-num">01</span>
+      <h4>Capture</h4>
+      <p>Flight around the property, roughly 30–40 minutes on site.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">02</span>
+      <h4>Process</h4>
+      <p>Reconstruction and Gaussian splat training on our own rig.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">03</span>
+      <h4>Cleanup</h4>
+      <p>Artifacts removed, bounds cleaned, quality inspection before delivery.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-num">04</span>
+      <h4>Deliver</h4>
+      <p>Hosted link and embed code, ready to drop into your listing.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="services">
+<div class="wrap">
+  <div class="section-label">What We Deliver</div>
+  <h2>Gaussian Splat <em>Models</em></h2>
+  <p class="section-sub">One service, done exceptionally well: photorealistic exterior and grounds captures that pair with your existing interior photos.</p>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <h3>Aerial Capture</h3>
+      <p>We fly the full exterior and grounds using a structured drone capture pattern optimized for Gaussian splatting reconstruction.</p>
+      <div class="service-tags">
+        <span class="pill">Exterior</span>
+        <span class="pill">Rooftop</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <h3>3DGS Processing</h3>
+      <p>Raw captures are processed into a high-fidelity Gaussian splat scene, photorealistic detail that meshes can't match.</p>
+      <div class="service-tags">
+        <span class="pill">High Fidelity</span>
+        <span class="pill">1:1 Scale</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <h3>Web-Ready Delivery</h3>
+      <p>Final model delivered as an embeddable web viewer: drop it into any listing page, portfolio, or client presentation.</p>
+      <div class="service-tags">
+        <span class="pill">Web Embed</span>
+        <span class="pill">Shareable Link</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="pricing">
+<div class="wrap">
+  <div class="section-label">Simple Pricing</div>
+  <h2>One Flat <em>Rate</em></h2>
+  <p class="section-sub">Know the price before you even call. One rate, every standard listing.</p>
+  <div class="price-card reveal">
+    <div class="price-card-main">
+      <div>
+        <span class="price-amount">$275</span>
+        <span class="price-sub">flat, per property</span>
+      </div>
+      <a class="btn-primary" href="#contact">Book This Rate <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+    <ul class="price-includes">
+      <li><svg class="check-ico-sm" viewBox="0 0 10 8" fill="none" aria-hidden="true"><path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Exterior & grounds aerial capture: 1-2 story homes, standard Lake Nona lot sizes</li>
+      <li><svg class="check-ico-sm" viewBox="0 0 10 8" fill="none" aria-hidden="true"><path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Full Gaussian splat processing and cleanup</li>
+      <li><svg class="check-ico-sm" viewBox="0 0 10 8" fill="none" aria-hidden="true"><path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Hosted, embeddable 3D model with shareable link</li>
+      <li><svg class="check-ico-sm" viewBox="0 0 10 8" fill="none" aria-hidden="true"><path d="M1 4l2.5 2.5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>48-hour typical turnaround</li>
+    </ul>
+    <p class="price-note">Larger lots, multi-acre properties, gated communities, or rush turnaround: <a href="#contact">contact for a custom quote</a>.</p>
+  </div>
+
+  <div class="recurring-block reveal reveal-delay-1">
+    <div class="recurring-head">
+      <h3>Bulk Rates For Realtors</h3>
+      <p>Listing more than one property a month? Locked-in per-property pricing, priority scheduling.</p>
+    </div>
+    <div class="recurring-tiers">
+      <div class="tier">
+        <div class="tier-name">Basic</div>
+        <div class="tier-freq">2 properties / month</div>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Professional</div>
+        <div class="tier-freq">4 properties / month</div>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Enterprise</div>
+        <div class="tier-freq">Brokerage / custom volume</div>
+      </div>
+    </div>
+    <p class="price-note" style="margin-top:20px"><a href="#contact">Contact for a package quote</a>.</p>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="faq">
+<div class="wrap">
+  <div class="section-label">Common Questions</div>
+  <h2>Frequently <em>Asked</em></h2>
+  <p class="section-sub">Everything most people ask before booking. Call or text if yours isn't here.</p>
+  <div class="faq-list reveal">
+    <details class="faq-item">
+      <summary>What areas do you serve?<span class="faq-icon">+</span></summary>
+      <div class="faq-answer"><p>Lake Nona and the greater Orlando area. If you're just outside that range, reach out. Longer drives may carry a small travel add-on.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>How long does a capture take?<span class="faq-icon">+</span></summary>
+      <div class="faq-answer"><p>Most standard homes take about 30-40 minutes on site for the aerial flight. Larger lots or multiple buildings take longer.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>What if it rains or is too windy to fly?<span class="faq-icon">+</span></summary>
+      <div class="faq-answer"><p>We reschedule at no charge. Wind and rain both affect flight safety and image quality, so we wait for a clean weather window rather than deliver a lower-quality capture.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>Do I need to be at the property during the capture?</summary>
+      <div class="faq-answer"><p>Not necessarily, but we do need reliable access arranged ahead of time, whether that's a gate code, lockbox, or someone letting us onto the property.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>Can I use the 3D model anywhere I want?<span class="faq-icon">+</span></summary>
+      <div class="faq-answer"><p>Yes. The delivered model and shareable link are yours to embed on your listing page, MLS (where supported), and social media.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>What's your turnaround time?<span class="faq-icon">+</span></summary>
+      <div class="faq-answer"><p>48 hours is typical from capture to delivery. Rush turnaround may be available; ask when you request a quote.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>What if something in the model looks off?<span class="faq-icon">+</span></summary>
+      <div class="faq-answer"><p>Reach out and we'll take a look. Minor cleanup on our end is part of the service; we want the delivered model to actually be usable for you.</p></div>
+    </details>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="contact">
+<div class="wrap">
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <div class="section-label">Start a Project</div>
+      <h2>Get a <em>Quote</em></h2>
+      <p>Tell us about your property and timeline. You'll get a clear scope and price back fast.</p>
+      <ul class="check-list">
+        <li><svg class="check-ico" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 10.2l2.6 2.6L14.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Exterior & grounds aerial capture</li>
+        <li><svg class="check-ico" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 10.2l2.6 2.6L14.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Photorealistic Gaussian splat output</li>
+        <li><svg class="check-ico" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 10.2l2.6 2.6L14.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Web-embeddable viewer included</li>
+        <li><svg class="check-ico" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 10.2l2.6 2.6L14.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Lake Nona & greater Orlando area</li>
+        <li><svg class="check-ico" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 10.2l2.6 2.6L14.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>48-hour standard turnaround</li>
+      </ul>
+      <div class="contact-direct">
+        <span class="contact-direct-label">Prefer to talk it through?</span>
+        <a href="tel:4074879843" class="contact-direct-phone">(407) 487-9843</a>
+        <span class="contact-direct-note">Call or text: you'll reach the person flying the drone, not a call center.</span>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <form id="quoteForm" action="https://formspree.io/f/xwvpogpg" method="POST">
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+        </div>
+        <div class="field">
+          <label for="message">Property Details</label>
+          <textarea id="message" name="message" placeholder="Describe the property, address, and when you'd like it captured..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message →</button>
+        <p id="formError" class="form-error" role="alert" aria-live="assertive"></p>
+      </form>
+      <div id="formSuccess" class="form-success" role="status" aria-live="polite" style="display:none">
+        <div class="form-success-icon">✓</div>
+        <h3>Message sent</h3>
+        <p>We typically reply within one business day. If it's urgent, call or text <a href="tel:4074879843">(407) 487-9843</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="footer-inner">
+  <div class="footer-brand">
+    <img src="logo-mark.png" alt="LN Photogrammetry" id="footerLogo">
+    <span class="footer-copy">© <span id="yr"></span> LN Photogrammetry · Lake Nona, Orlando FL · <a href="tel:4074879843" style="color:var(--muted)">(407) 487-9843</a></span>
+  </div>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+  </div>
+  <div class="footer-meta">Site last updated: August 23, 2026</div>
+</div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<div class="cookie-banner" id="cookieBanner">
+  <p>This site uses local storage for basic functionality (like remembering your light/dark preference) and to see how visitors find us. See our <a href="privacy.html">Privacy Policy</a>.</p>
+  <button class="cookie-accept" id="cookieAccept">Got it</button>
+</div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ACCESSIBILITY: text size + reduce motion + panel */
+(function(){
+  const root = document.documentElement;
+  const a11yToggle = document.getElementById('a11yToggle');
+  const a11yPanel = document.getElementById('a11yPanel');
+  const sizeButtons = document.querySelectorAll('.a11y-textsize-buttons button');
+  const motionToggles = [document.getElementById('reduceMotionToggle'), document.getElementById('reduceMotionToggleMobile')].filter(Boolean);
+
+  // panel open/close
+  a11yToggle.addEventListener('click', function(e){
+    e.stopPropagation();
+    const isOpen = a11yPanel.classList.toggle('open');
+    a11yToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(e){
+    if(!a11yPanel.contains(e.target) && e.target !== a11yToggle){
+      a11yPanel.classList.remove('open');
+      a11yToggle.setAttribute('aria-expanded','false');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      a11yPanel.classList.remove('open');
+      a11yToggle.setAttribute('aria-expanded','false');
+    }
+  });
+
+  // text size
+  function applyTextSize(size){
+    if(size === 'normal'){ root.removeAttribute('data-text-size'); }
+    else { root.setAttribute('data-text-size', size); }
+    sizeButtons.forEach(function(btn){
+      const active = btn.getAttribute('data-size') === size;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    localStorage.setItem('ln-text-size', size);
+  }
+  const storedSize = localStorage.getItem('ln-text-size') || 'normal';
+  applyTextSize(storedSize);
+  sizeButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){ applyTextSize(btn.getAttribute('data-size')); });
+  });
+
+  // reduce motion
+  function applyReduceMotion(on){
+    if(on){ root.setAttribute('data-reduce-motion','true'); } else { root.removeAttribute('data-reduce-motion'); }
+    motionToggles.forEach(function(t){ t.checked = on; });
+    localStorage.setItem('ln-reduce-motion', on ? 'true' : 'false');
+  }
+  applyReduceMotion(localStorage.getItem('ln-reduce-motion') === 'true');
+  motionToggles.forEach(function(t){
+    t.addEventListener('change', function(){ applyReduceMotion(t.checked); });
+  });
+})();
+
+/* THEME TOGGLE */
+(function(){
+  const root = document.documentElement;
+  const stored = localStorage.getItem('ln-theme');
+  if(stored === 'light' || stored === 'dark'){ root.setAttribute('data-theme', stored); }
+  function updateLogos(theme){
+    const src = theme === 'light' ? 'logo-mark-dark.png' : 'logo-mark.png';
+    const nav = document.getElementById('navLogo');
+    const foot = document.getElementById('footerLogo');
+    if(nav) nav.src = src;
+    if(foot) foot.src = src;
+  }
+  updateLogos(stored === 'light' ? 'light' : 'dark');
+  function toggleTheme(){
+    const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    const next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('ln-theme', next);
+    updateLogos(next);
+  }
+  document.querySelectorAll('.theme-toggle').forEach(function(btn){
+    btn.addEventListener('click', toggleTheme);
+  });
+})();
+
+/* MOBILE MENU */
+const navToggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+navToggle.addEventListener('click', function(){
+  const isOpen = mobileMenu.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+mobileMenu.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click', function(){
+    mobileMenu.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+  });
+});
+
+/* SCROLL PROGRESS + BACK TO TOP */
+const scrollProgress = document.getElementById('scrollProgress');
+const backToTop = document.getElementById('backToTop');
+function onScroll(){
+  const h = document.documentElement;
+  const scrollTop = h.scrollTop || document.body.scrollTop;
+  const scrollHeight = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+  const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  scrollProgress.style.width = pct + '%';
+  if(scrollTop > 500){ backToTop.classList.add('show'); } else { backToTop.classList.remove('show'); }
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+backToTop.addEventListener('click', function(){
+  window.scrollTo({ top:0, behavior:'smooth' });
+});
+
+/* SPLAT LOADING SPINNER */
+const splatLoading = document.getElementById('splatLoading');
+const viewer = document.getElementById('viewer');
+if(viewer){
+  viewer.addEventListener('load', function(){
+    splatLoading.classList.add('hidden');
+  });
+  setTimeout(function(){ splatLoading.classList.add('hidden'); }, 6000);
+}
+
+/* COOKIE BANNER */
+const cookieBanner = document.getElementById('cookieBanner');
+const cookieAccept = document.getElementById('cookieAccept');
+if(!localStorage.getItem('ln-cookie-consent')){
+  setTimeout(function(){ cookieBanner.classList.add('visible'); }, 900);
+}
+cookieAccept.addEventListener('click', function(){
+  localStorage.setItem('ln-cookie-consent','accepted');
+  cookieBanner.classList.remove('visible');
+});
+
+/* UTM TRACKING */
+(function(){
+  const keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+  const params = new URLSearchParams(window.location.search);
+  let data = {};
+  let found = false;
+  keys.forEach(function(k){
+    if(params.has(k)){ data[k] = params.get(k); found = true; }
+  });
+  if(found){
+    data.ts = Date.now();
+    localStorage.setItem('ln_utm', JSON.stringify(data));
+  }
+})();
+
+/* CONTACT FORM */
+const quoteForm = document.getElementById('quoteForm');
+const formError = document.getElementById('formError');
+quoteForm.addEventListener('submit', async function(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="btn-spinner"></span>Sending…';
+  formError.style.display = 'none';
+
+  // attach UTM + landing page attribution as hidden fields
+  try{
+    const utmRaw = localStorage.getItem('ln_utm');
+    if(utmRaw){
+      const utm = JSON.parse(utmRaw);
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){
+        if(utm[k]){
+          const input = document.createElement('input');
+          input.type = 'hidden'; input.name = k; input.value = utm[k];
+          quoteForm.appendChild(input);
+        }
+      });
+    }
+    const pageInput = document.createElement('input');
+    pageInput.type = 'hidden'; pageInput.name = 'landing_page'; pageInput.value = window.location.href;
+    quoteForm.appendChild(pageInput);
+  }catch(err){}
+
+  try{
+    const res = await fetch(quoteForm.action, {
+      method: 'POST',
+      body: new FormData(quoteForm),
+      headers: { 'Accept': 'application/json' }
+    });
+    if(res.ok){
+      quoteForm.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      throw new Error('Submit failed');
+    }
+  } catch(err){
+    formError.textContent = "Something went wrong sending that. Call or text (407) 487-9843 and we'll get you sorted.";
+    formError.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Send Message →';
+  }
+});
+
+/* REVEAL ON SCROLL */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
